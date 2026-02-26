@@ -22,6 +22,24 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
 # In-memory activity database
 activities = {
     "Chess Club": {
+        "1": {
+            "description": "Learn strategies and compete in chess tournaments",
+            "schedule": "Fridays, 3:30 PM - 5:00 PM",
+            "max_participants": 12,
+            "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
+            },
+            "Basketball Club": {
+            "description": "Develop basketball skills and compete in friendly matches",
+            "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+            "max_participants": 15,
+            "participants": []
+            },
+            "Tennis Team": {
+            "description": "Learn tennis techniques and participate in tournaments",
+            "schedule": "Mondays and Thursdays, 3:45 PM - 5:00 PM",
+            "max_participants": 10,
+            "participants": []
+            },
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
@@ -53,9 +71,9 @@ def get_activities():
 
 
 @app.post("/activities/{activity_name}/signup")
-def signup_for_activity(activity_name: str, email: str):
-    """Sign up a student for an activity"""
-    # Validate activity exists
+    def signup_for_activity(activity_name: str, email: str):
+        """Sign up a student for an activity"""
+        # Validate activity exists
     if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
 
